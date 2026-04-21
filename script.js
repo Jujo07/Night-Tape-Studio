@@ -22,6 +22,12 @@ setInterval(() => {
   setTimeout(() => { gbar.style.opacity = '0'; }, 90);
 }, 800);
 
+function startMusic(){
+  document.getElementById("music").play();
+  document.getElementById("enter").style.display = "none";
+}
+
+
 // ── Micro-shake del body ──
 setInterval(() => {
   const offsetX = (Math.random() - 0.5) * 2.5;
