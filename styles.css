@@ -1,0 +1,299 @@
+/* =============================================
+   NIGHT TAPE STUDIO — styles.css (v2 con imágenes reales)
+   ============================================= */
+
+   @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Share+Tech+Mono&display=swap');
+
+   * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+   }
+   
+   body {
+     font-family: 'Special Elite', monospace;
+     background: #080808;
+     color: #aaffcc;
+     min-height: 100vh;
+     overflow-x: hidden;
+     display: flex;
+     flex-direction: column;
+     position: relative;
+   }
+   
+   /* ── Fondo bosque (tu imagen real) ── */
+   .bg-forest {
+     position: fixed;
+     inset: 0;
+     z-index: 0;
+     background-image: url('img/bosque-fondo.png'); /* <-- tu imagen de fondo */
+     background-size: cover;
+     background-position: center top;
+     filter: brightness(0.35) saturate(0.6);
+   }
+   
+   /* ── Viñeta oscura encima del fondo ── */
+   .bg-vignette {
+     position: fixed;
+     inset: 0;
+     z-index: 1;
+     background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.85) 100%);
+   }
+   
+   /* ── Scanlines ── */
+   .scanlines {
+     position: fixed;
+     inset: 0;
+     pointer-events: none;
+     z-index: 999;
+     background: repeating-linear-gradient(
+       0deg,
+       transparent,
+       transparent 2px,
+       rgba(0, 0, 0, 0.15) 2px,
+       rgba(0, 0, 0, 0.15) 4px
+     );
+   }
+   
+   /* ── Glitch bar horizontal ── */
+   .glitch-bar {
+     position: fixed;
+     height: 2px;
+     background: #00ff9d;
+     opacity: 0;
+     left: 0;
+     right: 0;
+     z-index: 1000;
+     pointer-events: none;
+     transition: opacity 0.05s;
+   }
+   
+   /* ── Header bar ── */
+   .header-bar {
+     background: rgba(4, 6, 4, 0.92);
+     border-bottom: 1px solid #00ff9d1a;
+     padding: 8px 18px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     position: sticky;
+     top: 0;
+     z-index: 100;
+   }
+   
+   .hb-left,
+   .hb-right {
+     font-family: 'Share Tech Mono', monospace;
+     font-size: 10px;
+     color: #2a5535;
+     letter-spacing: 1px;
+     text-transform: uppercase;
+   }
+   
+   .hb-center {
+     font-family: 'Share Tech Mono', monospace;
+     font-size: 10px;
+     color: #ff2255;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+   }
+   
+   /* ── REC blink ── */
+   .rec-blink {
+     display: inline-block;
+     animation: blink 1.2s infinite;
+   }
+   
+   @keyframes blink {
+     0%, 49% { opacity: 1; }
+     50%, 100% { opacity: 0; }
+   }
+   
+   /* ── Layout grid ── */
+   .container {
+     display: grid;
+     grid-template-columns: 160px 1fr 160px;
+     flex: 1;
+     position: relative;
+     z-index: 5;
+   }
+   
+   /* ── Laterales ── */
+   .side {
+     padding: 22px 12px;
+     display: flex;
+     flex-direction: column;
+     gap: 12px;
+     font-size: 11px;
+     line-height: 1.6;
+     color: #55cc88;
+   }
+   
+   .side.left  { border-right: 1px solid #00ff9d22; text-align: left; }
+   .side.right { border-left:  1px solid #00ff9d22; text-align: right; }
+   
+   .warn {
+     color: #66bb99;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     font-size: 10px;
+     animation: flk 3s infinite;
+   }
+   .warn:nth-child(2) { animation-delay: 0.5s; }
+   .warn:nth-child(3) { animation-delay: 1.2s; }
+   .warn:nth-child(4) { animation-delay: 0.8s; }
+   .warn:nth-child(5) { animation-delay: 2.0s; }
+   .warn:nth-child(6) { animation-delay: 1.6s; }
+   
+   @keyframes flk {
+     0%, 94%  { opacity: 1; }
+     95%      { opacity: 0.1; }
+     96.5%    { opacity: 1; }
+     97.5%    { opacity: 0.3; }
+     100%     { opacity: 1; }
+   }
+   
+   /* ── Centro ── */
+   .center {
+     padding: 18px 20px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+   }
+   
+   /* ── Título ── */
+   .title {
+     font-size: clamp(32px, 5vw, 58px);
+     color: #ddfff0;
+     letter-spacing: 4px;
+     text-transform: uppercase;
+     line-height: 1.1;
+     animation: glitch-title 5s infinite;
+     margin-bottom: 6px;
+   }
+   
+   @keyframes glitch-title {
+     0%, 88%  { text-shadow: 2px 0 #ff00aa, -2px 0 #00ffdd; transform: translateX(0); }
+     89%      { text-shadow: 7px 0 #ff00aa, -7px 0 #00ffdd; transform: translateX(-2px); }
+     90%      { text-shadow: -5px 0 #ff00aa, 5px 0 #00ffdd; transform: translateX(2px); }
+     91%      { text-shadow: 2px 0 #ff00aa, -2px 0 #00ffdd; transform: translateX(0); }
+     100%     { text-shadow: 2px 0 #ff00aa, -2px 0 #00ffdd; }
+   }
+   
+   .subtitle {
+     font-family: 'Share Tech Mono', monospace;
+     font-size: 9px;
+     color: #33996655;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     margin-bottom: 18px;
+   }
+   
+   /* ── Marco TV ── */
+   .tv-wrap {
+     width: 100%;
+     max-width: 500px;
+     border: 2px solid #1a1a1a;
+     background: rgba(8, 12, 8, 0.82);
+     padding: 16px;
+     position: relative;
+     box-shadow: 0 0 0 1px #00ff9d11, inset 0 0 24px rgba(0, 255, 157, 0.04);
+     backdrop-filter: blur(2px);
+   }
+   
+   .tv-corner {
+     position: absolute;
+     width: 12px;
+     height: 12px;
+     border-color: #00ff9d44;
+     border-style: solid;
+   }
+   .tv-corner.tl { top: 5px;    left: 5px;    border-width: 1px 0 0 1px; }
+   .tv-corner.tr { top: 5px;    right: 5px;   border-width: 1px 1px 0 0; }
+   .tv-corner.bl { bottom: 5px; left: 5px;    border-width: 0 0 1px 1px; }
+   .tv-corner.br { bottom: 5px; right: 5px;   border-width: 0 1px 1px 0; }
+   
+   .studio-tag {
+     font-family: 'Share Tech Mono', monospace;
+     font-size: 8px;
+     color: #2a7744;
+     letter-spacing: 2px;
+     text-transform: uppercase;
+     margin-bottom: 14px;
+     line-height: 1.9;
+   }
+   
+   /* ── Carátula del juego (imagen real) ── */
+   .game-cover-wrap {
+     display: block;
+     width: 75%;
+     margin: 0 auto 14px;
+     position: relative;
+     cursor: pointer;
+     border: 2px solid #00ff9d33;
+     text-decoration: none;
+     transition: transform 0.35s, filter 0.35s, border-color 0.35s;
+     box-shadow: 0 0 18px rgba(0, 255, 157, 0.06);
+   }
+   
+   .game-cover-wrap:hover {
+     transform: scale(1.04);
+     filter: brightness(1.12) saturate(1.2);
+     border-color: #00ff9d66;
+     box-shadow: 0 0 28px rgba(0, 255, 157, 0.16);
+   }
+   
+   .game-cover-wrap img {
+     display: block;
+     width: 100%;
+     height: auto;
+     image-rendering: pixelated;
+   }
+   
+   .vhs-label {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background: rgba(0, 0, 0, 0.92);
+     color: #ff2255;
+     font-family: 'Share Tech Mono', monospace;
+     font-size: 9px;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     padding: 5px 0;
+     text-align: center;
+     border-top: 1px solid #00ff9d44;
+   }
+   
+   /* ── Descripción ── */
+   .game-info {
+     font-family: 'Share Tech Mono', monospace;
+     font-size: 9.5px;
+     line-height: 1.9;
+     color: #77aa88;
+     text-align: left;
+   }
+   
+   /* ── Footer ── */
+   .footer {
+     border-top: 1px solid #00ff9d1a;
+     padding: 9px 18px;
+     text-align: center;
+     font-family: 'Share Tech Mono', monospace;
+     font-size: 9px;
+     color: #1e4430;
+     letter-spacing: 3px;
+     text-transform: uppercase;
+     background: rgba(4, 6, 4, 0.95);
+     position: relative;
+     z-index: 5;
+   }
+   
+   /* ── Responsive ── */
+   @media (max-width: 700px) {
+     .container { grid-template-columns: 1fr; }
+     .side { display: none; }
+     .title { font-size: 32px; }
+   }
